@@ -1,0 +1,22 @@
+{
+  "updated": "2026-09-28T09:00-04:00",
+  "sample": true,
+  "source": "Sample of real South Dining Hall breakfast items seen on 2026-09-28. Replaced by the daily update.",
+  "halls": {
+    "south-dining-hall": {
+      "name": "South Dining Hall",
+      "meals": {
+        "breakfast": {
+          "2026-09-28": [
+            {"n": "Egg, Sausage & Cheese Bagel Sandwich", "st": "Breakfast", "sv": "5 oz", "cal": 599, "p": 22, "c": 61, "f": 30, "fi": 0, "su": 0, "na": 0},
+            {"n": "Chicken Breakfast Sausage Links", "st": "Breakfast", "sv": "1 link", "cal": 61, "p": 4, "c": 1, "f": 3.9, "fi": 0, "su": 0, "na": 0},
+            {"n": "Breakfast Smoked Sausage Links", "st": "Breakfast", "sv": "2 link", "cal": 130, "p": 5, "c": 2, "f": 13, "fi": 0, "su": 0, "na": 0},
+            {"n": "Scrambled Eggs", "st": "Breakfast", "sv": "4 oz", "cal": 161, "p": 13, "c": 0, "f": 13, "fi": 0, "su": 0, "na": 0},
+            {"n": "Hard Boiled Egg", "st": "Breakfast", "sv": "1 egg", "cal": 79, "p": 7, "c": 0, "f": 6, "fi": 0, "su": 0, "na": 0},
+            {"n": "Sausage Gravy", "st": "Breakfast", "sv": "2 fl oz", "cal": 100, "p": 5, "c": 5, "f": 6, "fi": 0, "su": 0, "na": 0}
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plate Planner: build a meal from the dining hall menu</title>
+  <meta name="description" content="Build a meal from today's dining hall menu that fits your calorie and protein goals.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%BD%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#menu-heading">Skip to the menu</a>
+
+  <header class="masthead">
+    <h1>Plate Planner</h1>
+    <p>Pick a dining hall and meal, set your goal, and get meal ideas that fit your calories and protein.</p>
+  </header>
+
+  <p id="load-error" class="banner error" role="alert" hidden></p>
+  <p id="sample-note" class="banner" hidden>
+    This is sample data with only a few items. The real menu appears after the daily update runs.
+  </p>
+  <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+
+  <main class="layout">
+    <section class="panel area-picker" aria-labelledby="picker-heading">
+      <h2 id="picker-heading">Which meal</h2>
+      <div class="fields three">
+        <label>Dining hall
+          <select id="hall"></select>
+        </label>
+        <label>Meal
+          <select id="meal"></select>
+        </label>
+        <label>Day
+          <select id="date"></select>
+        </label>
+      </div>
+      <p id="updated" class="fine"></p>
+    </section>
+
+    <section class="panel area-targets" aria-labelledby="targets-heading">
+      <h2 id="targets-heading">Your goal</h2>
+      <div id="goals" class="chips" role="group" aria-label="Goal"></div>
+      <p id="goal-blurb" class="fine"></p>
+
+      <div class="fields two">
+        <label>Calories per day
+          <input id="daily-kcal" type="number" inputmode="numeric" min="800" max="6000" step="10">
+        </label>
+        <label>Protein per day (g)
+          <input id="daily-protein" type="number" inputmode="numeric" min="20" max="400" step="1">
+        </label>
+      </div>
+
+      <details class="calc">
+        <summary>Work out my numbers from my stats</summary>
+        <div class="fields three">
+          <label>Sex
+            <select id="sex">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </label>
+          <label>Age
+            <input id="age" type="number" inputmode="numeric" min="18" max="90">
+          </label>
+          <label>Weight (lb)
+            <input id="weight" type="number" inputmode="decimal" min="70" max="500">
+          </label>
+          <label>Height (ft)
+            <input id="height-ft" type="number" inputmode="numeric" min="4" max="7">
+          </label>
+          <label>Height (in)
+            <input id="height-in" type="number" inputmode="numeric" min="0" max="11">
+          </label>
+          <label>Activity
+            <select id="activity"></select>
+          </label>
+        </div>
+        <button id="calc" type="button" class="btn">Calculate</button>
+        <p id="calc-note" class="note" aria-live="polite"></p>
+      </details>
+    </section>
+
+    <section class="panel area-suggest" aria-labelledby="suggest-heading">
+      <h2 id="suggest-heading">Suggest a meal</h2>
+      <div class="fields two">
+        <label>Calories for this meal
+          <input id="meal-kcal" type="number" inputmode="numeric" min="100" max="3000" step="10">
+        </label>
+        <label>Protein for this meal (g)
+          <input id="meal-protein" type="number" inputmode="numeric" min="0" max="200" step="1">
+        </label>
+        <label>Try to include
+          <input id="like" type="text" placeholder="chicken, oatmeal">
+        </label>
+        <label>Leave out
+          <input id="avoid" type="text" placeholder="pork, mushroom">
+        </label>
+      </div>
+      <button id="suggest" type="button" class="btn primary">Suggest meals</button>
+      <div id="plates" class="plates"></div>
+      <p id="plates-empty" class="empty" hidden>
+        Nothing on this menu fits. Try removing an item from Leave out, or pick another meal.
+      </p>
+    </section>
+
+    <aside class="today area-today" aria-labelledby="today-heading">
+      <h2 id="today-heading">Today</h2>
+      <div id="today-summary"></div>
+      <h3 class="sub">Eaten so far</h3>
+      <p id="log-empty" class="empty">Nothing yet. Add items from a meal idea or the menu.</p>
+      <ul id="log-list" class="log"></ul>
+      <button id="clear-log" type="button" class="btn ghost" hidden>Clear today</button>
+    </aside>
+
+    <section class="panel area-menu" aria-labelledby="menu-heading">
+      <div class="menu-head">
+        <h2 id="menu-heading">Full menu <span id="menu-count" class="count"></span></h2>
+        <label class="search">Search
+          <input id="search" type="search" placeholder="eggs, chicken, yogurt">
+        </label>
+      </div>
+      <div id="menu-list"></div>
+      <p id="menu-empty" class="empty" hidden>No items match that search.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Unofficial. Not affiliated with the University of Notre Dame or Nutrislice. Menu and nutrition data come from the dining hall's published menus and can change or contain errors.</p>
+    <p>Calorie and protein targets are general estimates, not medical advice. Talk to a doctor or registered dietitian before making big changes to how you eat.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

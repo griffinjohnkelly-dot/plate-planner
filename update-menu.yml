@@ -1,0 +1,48 @@
+name: Update menu and deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 9 * * *"   # every day at 09:00 UTC (about 5 AM in South Bend)
+  workflow_dispatch:       # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch the latest menus
+        run: python scripts/fetch_menu.py
+
+      - name: Assemble the site
+        run: |
+          mkdir _site
+          cp index.html app.js styles.css _site/
+          cp -r data _site/data
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
