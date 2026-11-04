@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+!/usr/bin/env python3
 """Fetch Notre Dame dining hall menus from Nutrislice and write data/menu.json.
 
 Runs once a day from GitHub Actions, so the app never has to call Nutrislice
