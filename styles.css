@@ -86,7 +86,7 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0; }
       "menu today";
     align-items: start;
   }
-  .area-today { position: sticky; top: 1rem; }
+  .area-today { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; overscroll-behavior: contain; }
 }
 
 .panel {
