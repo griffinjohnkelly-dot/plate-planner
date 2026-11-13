@@ -86,7 +86,7 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0; }
       "menu today";
     align-items: start;
   }
-  .area-today { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; overscroll-behavior: contain; }
+  .area-today { position: sticky; top: 1rem; }
 }
 
 .panel {
@@ -204,6 +204,37 @@ input::placeholder { color: #8a95a6; }
 .log { list-style: none; margin: 0 0 .75rem; padding: 0; }
 .log li { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .5rem 0; border-bottom: 1px solid var(--line); }
 .log li > div { display: flex; flex-direction: column; min-width: 0; }
+
+/* Desktop: the panel fits the screen, totals stay put, only the food list scrolls */
+@media (min-width: 900px) {
+  .area-today {
+    max-height: calc(100vh - 2rem);
+    display: flex; flex-direction: column;
+    overflow-y: auto; overscroll-behavior: contain;
+  }
+  .area-today > * { flex-shrink: 0; }
+  .area-today .log {
+    flex: 1 1 auto; min-height: 5.5rem;
+    overflow-y: auto; overscroll-behavior: contain;
+    margin-bottom: .5rem;
+  }
+  .today { padding-top: .75rem; }
+  .today h2 { font-size: 1.5rem; padding-bottom: .3rem; border-bottom-width: 4px; }
+  .big { margin-top: .4rem; }
+  .big-num { font-size: 2.5rem; }
+  .left { margin: .15rem 0 .4rem; padding-bottom: .4rem; }
+  #today-summary { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: .9rem; }
+  /* big number, "left today", calories meter (3rd child) and footnote span the full width */
+  #today-summary > .big, #today-summary > .left, #today-summary > .fine,
+  #today-summary > .meter:nth-child(3) { grid-column: 1 / -1; }
+  .meter { padding: .3rem 0; }
+  .meter-head { font-size: .85rem; }
+  #today-summary > .meter:nth-child(n+4) .meter-head { flex-direction: column; gap: 0; }
+  .area-today > #clear-log { align-self: flex-start; }
+  .bar { height: 8px; margin-top: .2rem; }
+  #today-summary > .fine { font-size: .75rem; line-height: 1.35; margin: .4rem 0 0; }
+  .sub { margin-top: .75rem; }
+}
 
 .foot { max-width: 1100px; margin: 0 auto; padding: 0 1rem 2.5rem; color: var(--muted); font-size: .85rem; }
 .foot p { margin: 0 0 .5rem; max-width: 46rem; }
